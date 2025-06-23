@@ -1,0 +1,160 @@
+/* CSS变量定义 */
+:root {
+    /* 主色调 - 街头艺术风格 */
+    --bg-primary: #f4d03f;  /* 温暖黄色背景 */
+    --bg-secondary: #f39c12; /* 橙黄色 */
+    --bg-tertiary: #e67e22;  /* 深橙色 */
+    
+    /* 强调色 */
+    --accent-red: #e74c3c;   /* 鲜红色 */
+    --accent-blue: #3498db;  /* 蓝色 */
+    --accent-orange: #ff6b35; /* 橙红色 */
+    --accent-black: #2c3e50;  /* 深黑色 */
+    
+    /* 渐变色 - 鸡蛋效果 */
+    --gradient-egg: linear-gradient(135deg, #f4d03f 0%, #f39c12 50%, #e67e22 100%);
+    --gradient-button: linear-gradient(135deg, #e74c3c 0%, #ff6b35 100%);
+    --gradient-accent: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    
+    /* 文字颜色 */
+    --text-primary: #2c3e50;   /* 深色文字 */
+    --text-secondary: #34495e; /* 次要文字 */
+    --text-white: #ffffff;     /* 白色文字 */
+    --text-accent: #e74c3c;    /* 强调文字 */
+    
+    /* 阴影和效果 */
+    --shadow-comic: 4px 4px 0px #2c3e50;  /* 漫画风格阴影 */
+    --shadow-deep: 6px 6px 0px #2c3e50;   /* 深层阴影 */
+    --shadow-button: 3px 3px 0px #2c3e50; /* 按钮阴影 */
+    
+    /* 边框和圆角 */
+    --border-thick: 4px solid #2c3e50;    /* 粗黑边框 */
+    --border-medium: 3px solid #2c3e50;   /* 中等边框 */
+    --border-thin: 2px solid #2c3e50;     /* 细边框 */
+    --border-radius: 16px;                /* 圆角 */
+    --border-radius-lg: 24px;             /* 大圆角 */
+}
+
+/* 基础重置样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Comic Sans MS', 'Arial Black', sans-serif;
+    background: var(--bg-primary);
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba(231, 76, 60, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(52, 152, 219, 0.1) 0%, transparent 50%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    line-height: 1.4;
+    padding-bottom: 100px;
+}
+
+/* 顶部导航栏样式 */
+.top-nav {
+    background: var(--bg-secondary);
+    border: var(--border-thick);
+    border-bottom-width: 6px;
+    padding: 16px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-deep);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: var(--border-medium);
+    box-shadow: var(--shadow-comic);
+    transition: all 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: var(--shadow-deep);
+}
+
+.logo-text {
+    font-family: 'Impact', 'Franklin Gothic Bold', 'Arial Black', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: var(--shadow-comic);
+}
+
+/* 基础按钮样式 */
+.btn {
+    font-family: 'Comic Sans MS', 'Arial Black', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: var(--border-medium);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-deep);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-comic);
+}
+
+/* 连接钱包按钮 */
+.connect-wallet-btn {
+    background: var(--gradient-button);
+    color: var(--text-white);
+    padding: 12px 24px;
+    font-size: 16px;
+    box-shadow: var(--shadow-comic);
+}
+
+/* 基础表单样式 */
+input, textarea, select {
+    font-family: 'Comic Sans MS', 'Arial Black', sans-serif;
+    border: var(--border-medium);
+    border-radius: var(--border-radius);
+    padding: 12px 16px;
+    font-size: 16px;
+    background: var(--text-white);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+}

@@ -1,0 +1,357 @@
+/* 游戏主要区域样式 */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* 产品主标题区域 */
+.hero-title-section {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px 0;
+}
+
+.hero-title {
+    font-family: 'Impact', 'Franklin Gothic Bold', 'Arial Black', sans-serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 3px 3px 0px #ffffff;
+    margin-bottom: 10px;
+    animation: titlePulse 3s ease-in-out infinite;
+}
+
+/* 鸡蛋容器样式 */
+.egg-container {
+    position: relative;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.egg-image {
+    width: 280px;
+    height: 350px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    border: var(--border-thick);
+    box-shadow: var(--shadow-deep);
+    transition: all 0.4s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.egg-image:hover {
+    transform: scale(1.05) rotate(2deg);
+    box-shadow: 0 12px 30px rgba(44, 62, 80, 0.4);
+}
+
+/* 参与按钮样式 */
+.participate-btn {
+    background: var(--gradient-button);
+    color: var(--text-white);
+    padding: 18px 40px;
+    font-size: 22px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-comic);
+    position: relative;
+    overflow: hidden;
+}
+
+.participate-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.participate-btn:hover::before {
+    left: 100%;
+}
+
+/* 弹窗样式 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(44, 62, 80, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.show {
+    display: flex !important;
+}
+
+.modal-content {
+    background: var(--bg-secondary);
+    border: var(--border-thick);
+    border-radius: var(--border-radius-lg);
+    padding: 30px;
+    max-width: 480px;
+    width: 90%;
+    box-shadow: var(--shadow-deep);
+    position: relative;
+    margin: 0;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal.show .modal-content {
+    transform: scale(1);
+}
+
+/* 卡牌详情模态框样式 */
+.card-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+.card-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.card-modal-content {
+    position: relative;
+    background: linear-gradient(145deg, #2a2a3e, #1e1e32);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: auto;
+    border: 2px solid #ffd700;
+    box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
+    transform: scale(0.7) rotateY(-15deg);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card-modal.show .card-modal-content {
+    transform: scale(1) rotateY(0deg);
+}
+
+/* 底部导航栏样式 */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-secondary);
+    border-top: var(--border-thick);
+    padding: 12px 0;
+    z-index: 1000;
+    box-shadow: 0 -4px 0px var(--accent-black);
+}
+
+.nav-tabs {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.nav-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--text-primary);
+    min-width: 60px;
+}
+
+.nav-tab.active {
+    background: var(--accent-red);
+    color: var(--text-white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-comic);
+}
+
+.nav-tab:hover {
+    transform: translateY(-1px);
+    background: rgba(231, 76, 60, 0.1);
+}
+
+.nav-icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+    transition: all 0.3s ease;
+}
+
+.nav-tab.active .nav-icon {
+    transform: scale(1.1);
+}
+
+.nav-text {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 28px;
+    }
+    
+    .egg-image {
+        width: 220px;
+        height: 280px;
+    }
+    
+    .participate-btn {
+        padding: 16px 32px;
+        font-size: 20px;
+    }
+    
+    .modal-content {
+        padding: 25px 16px;
+    }
+    
+    .card-modal-content {
+        margin: 20px;
+        padding: 20px;
+        max-width: calc(100vw - 40px);
+        max-height: calc(100vh - 40px);
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 24px;
+    }
+    
+    .egg-image {
+        width: 180px;
+        height: 230px;
+    }
+    
+    .participate-btn {
+        padding: 14px 30px;
+        font-size: 18px;
+    }
+}
+
+/* 动画效果 */
+@keyframes titlePulse {
+    0%, 100% {
+        transform: scale(1);
+        text-shadow: 3px 3px 0px #ffffff;
+    }
+    50% {
+        transform: scale(1.02);
+        text-shadow: 4px 4px 0px #ffffff, 0 0 20px rgba(231, 76, 60, 0.3);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+/* 开发中提示弹窗样式 */
+.developing-modal {
+    max-width: 400px;
+    text-align: center;
+}
+
+.developing-content {
+    padding: 20px;
+}
+
+.developing-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    animation: bounce 2s infinite;
+}
+
+.developing-title {
+    color: #ffd700;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.developing-message {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    opacity: 0.9;
+}
+
+/* 移动端正方形弹窗优化 */
+@media (max-width: 768px) {
+    .developing-modal {
+        width: 280px;
+        height: 280px;
+        max-width: calc(100vw - 40px);
+        max-height: calc(100vw - 40px);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+    }
+    
+    .developing-content {
+        padding: 20px;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
