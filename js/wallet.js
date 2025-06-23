@@ -1557,3 +1557,19 @@ document.addEventListener('click', function(event) {
         closeLatestResultModal();
     }
 });
+
+// --- 项目介绍弹窗逻辑 (每次刷新都显示) ---
+
+document.addEventListener('DOMContentLoaded', () => {
+    const introModal = document.getElementById('introModal');
+    if (introModal) {
+        introModal.style.display = 'flex';
+    }
+});
+
+function closeIntroModal() {
+    const introModal = document.getElementById('introModal');
+    if (introModal) {
+        introModal.style.display = 'none';
+    }
+}
