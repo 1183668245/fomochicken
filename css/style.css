@@ -2581,3 +2581,121 @@ body {
     font-weight: 700;
     line-height: 1.4;
 }
+
+/* 项目介绍弹窗样式（已隔离） */
+#introModal.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#introModal .modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    border: 5px solid #f8c146;
+    animation: slide-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+#introModal .modal-title {
+    font-size: 24px;
+    color: #d9534f;
+    margin-bottom: 15px;
+}
+
+#introModal .modal-text {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+#introModal .modal-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+}
+
+#introModal .modal-confirm-btn {
+    background-color: #f8c146;
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#introModal .modal-confirm-btn:hover {
+    background-color: #e0ac30;
+}
+
+/* slide-in 动画保持不变 */
+@keyframes slide-in {
+    0% {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* 横向滚动文字样式 */
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+    background-color: #f8c146; /* 与网站主色调匹配的背景色 */
+    color: #d9534f; /* 与按钮等元素匹配的强调色 */
+    padding: 10px 0;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.marquee-text {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 20s linear infinite;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.marquee-text span {
+    padding-right: 100px; /* 调整两个文本之间的间距 */
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
