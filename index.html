@@ -48,6 +48,14 @@
         </div>
     </header>
 
+    <!-- 横向滚动文字 -->
+    <div class="marquee-container">
+        <div class="marquee-text">
+            <span>5 万代币即可入场，孵化「鸡蛋」开启财富盲盒，年化收益率高达13888%，日收益率36.88%</span>
+            <span>5 万代币即可入场，孵化「鸡蛋」开启财富盲盒，年化收益率高达13888%，日收益率36.88%</span>
+        </div>
+    </div>
+
     <!-- 主体内容区域 -->
     <main class="main-content page-content home-content">
         <!-- 产品主标题 -->
@@ -242,6 +250,19 @@
     <!-- <script src="js/lottery.js"></script> -->
     <!-- <script src="js/ui.js"></script> -->
     <!-- <script src="js/main.js"></script> -->
+
+    <!-- 项目介绍弹窗 -->
+    <div id="introModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <button class="modal-close-btn" onclick="closeIntroModal()">&times;</button>
+            <h2 class="modal-title">欢迎来到 FomoChicken</h2>
+            <p class="modal-text">
+                FomoChicken是一个结合代币抽奖与 NFT 质押等多功能菠菜平台，主打 “代币博彩，NFT分红” 概念。用户投入至少 5 万枚代币即可参与孵化，有机会赢取高达 1000万奖池奖励，支持钱包连接/代币抽奖/NFT 质押等功能，以高收益激励和透明化中奖机制源源不断的吸引加密货币玩家进场。
+            </p>
+            <button class="modal-confirm-btn" onclick="closeIntroModal()">我明白了</button>
+        </div>
+    </div>
+
 </body>
 </html>
 
