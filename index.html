@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOMO Chicken </title>
+    
+    <!-- 添加网站图标 -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- 现代化字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/airdrop.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <!-- 添加Web3.js库 -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.8.0/dist/web3.min.js"></script>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="top-nav">
+        <div class="nav-container">
+            <div class="logo-section">
+                <img src="logo.png" alt="FOMO Chicken" class="logo">
+            </div>
+            
+            <div class="right-section">
+                <!-- 社交媒体按钮 -->
+                <div class="social-links">
+                    <a href="https://t.me/FomoChicken_bsc" class="social-btn telegram-btn" title="Telegram">
+                        <div class="social-icon telegram-icon"></div>
+                    </a>
+                    <a href="https://x.com/FomoChicken_BSC" class="social-btn twitter-btn" title="Twitter/X">
+                        <div class="social-icon twitter-icon"></div>
+                    </a>
+                </div>
+                
+                <button id="connectWallet" class="connect-wallet-btn">
+                    <div class="wallet-icon"></div>
+                    <span id="walletText">连接钱包</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主体内容区域 -->
+    <main class="main-content page-content home-content">
+        <!-- 产品主标题 -->
+        <section class="hero-title-section">
+            <h1 class="hero-title">Stake Eggs, Hatch Lambos!</h1>
+            <p class="hero-subtitle">参与FOMO Chicken，赢取丰厚奖励</p>
+        </section>
+
+        <!-- 鸡蛋展示区 -->
+        <section class="egg-section">
+            <div class="egg-container">
+                <img id="eggImage" src="egg01.png" alt="FOMO Egg" class="egg-image">
+                <div class="egg-effects">
+                    <div class="glow-effect"></div>
+                    <div class="crack-effect" id="crackEffect"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 参与孵化按钮 -->
+        <section class="participate-section">
+            <!-- 修改参与孵化按钮 -->
+            <button id="participateBtn" class="participate-btn" onclick="showParticipateModal()">
+                <span class="btn-text">参与孵化</span>
+                <div class="btn-glow"></div>
+            </button>
+            
+            <!-- 添加玩法规则链接 -->
+            <div class="rules-link-container">
+                <a href="#" class="rules-link" onclick="showRulesModal()">玩法规则</a>
+            </div>
+            
+            <!-- 添加代币余额显示 -->
+            <div class="balance-display-container">
+                <div class="balance-label">我的代币余额</div>
+                <div id="userBalance" class="balance-amount">连接钱包查看余额</div>
+            </div>
+        </section>
+
+        <!-- 倒计时和奖池信息 -->
+        <section class="info-section">
+            <div class="countdown-container">
+                <h3 class="countdown-label">下轮孵化:</h3>
+                <div id="countdown" class="countdown-display">加载中...</div>
+            </div>
+            
+            <div class="prize-pool">
+                <div class="pool-header">
+                    <span class="pool-label">奖池</span>
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                </div>
+                <div class="pool-info">
+                    <span class="pool-text">当前奖池金额</span>
+                    <span id="poolAmount" class="pool-amount">加载中...</span>
+                </div>
+                <div class="participants-info">
+                    <span class="participants-text">参与人数</span>
+                    <span id="participantCount" class="participants-count">0</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 往期中奖地址区域 -->
+        <section class="winner-history-section">
+            <div class="winner-header">
+                <h3 class="winner-title">往期中奖地址</h3>
+                <span class="winner-subtitle">最近中奖记录</span>
+            </div>
+            <div id="winnerHistoryList" class="winner-list">
+                <!-- 动态加载的中奖记录 -->
+                <div class="loading-text">加载中...</div>
+            </div>
+            <!-- 删除这一行 -->
+            <!-- <button onclick="refreshData()" class="refresh-btn">🔄 刷新数据</button> -->
+        </section>
+    </main>
+
+    <!-- 底部Tab栏 -->
+    <footer class="bottom-nav">
+        <div class="tab-container">
+            <div class="tab-item active" data-tab="home">
+                <div class="tab-icon home-icon"></div>
+                <span class="tab-text">首页</span>
+            </div>
+            <div class="tab-item" data-tab="cards">
+                <div class="tab-icon card-icon"></div>
+                <span class="tab-text">玩法卡牌</span>
+            </div>
+            <div class="tab-item" data-tab="winners">
+                <div class="tab-icon trophy-icon"></div>
+                <span class="tab-text">领取空投</span>
+            </div>
+            <div class="tab-item" data-tab="nft">
+                <div class="tab-icon nft-icon"></div>
+                <span class="tab-text">NFT</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 玩法规则弹窗 -->
+    <div id="rulesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>玩法规则须知</h3>
+                <button class="close-btn" onclick="closeRulesModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="rules-content">
+                    <div class="rule-item">
+                        <span class="rule-number">1.</span>
+                        <span class="rule-text">您需要每次投入大于等于5万枚代币才能参与孵化</span>
+                    </div>
+                    <div class="rule-item">
+                        <span class="rule-number">2.</span>
+                        <span class="rule-text">每轮奖池您可以重复参与</span>
+                    </div>
+                    <div class="rule-item">
+                        <span class="rule-number">3.</span>
+                        <span class="rule-text">中奖后2小时之内到账</span>
+                    </div>
+                    <div class="rule-item">
+                        <span class="rule-number">4.</span>
+                        <span class="rule-text">您无法在内盘阶段参与；</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 参与孵化弹窗 -->
+    <div id="participateModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>参与孵化</h3>
+                <button class="close-btn" id="closeModal" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="balance-info">
+                    <span>当前余额: </span>
+                    <span id="modalUserBalance">0 GrooveMe</span>
+                </div>
+                <div class="input-group">
+                    <label for="tokenAmount">投入代币数量:</label>
+                    <input type="number" id="tokenAmount" placeholder="输入代币数量" min="0" step="0.01">
+                    <div class="quick-input-buttons">
+                        <button type="button" class="quick-input-btn" onclick="setQuickAmount(50000)">50,000</button>
+                    </div>
+                </div>
+                <button id="confirmParticipate" class="confirm-btn" onclick="confirmParticipation()">
+                    确认参与
+                </button>
+                <div class="participation-notice">
+                    <p>注：单次参与需投入5万代币以上，否则视为无效</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载遮罩 -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">孵化中...</p>
+    </div>
+
+    <!-- 最新结果别针 -->
+    <div id="latestResultPin" class="latest-result-pin" onclick="showLatestResultModal()">
+        <span class="pin-text">最新结果</span>
+    </div>
+
+    <!-- 最新结果弹窗 -->
+    <div id="latestResultModal" class="modal latest-result-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>最新开奖结果</h3>
+                <button class="close-btn" onclick="closeLatestResultModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="latestResultContent" class="latest-result-content">
+                    <div class="loading-text">加载中...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 删除整个钱包连接弹窗部分 -->
+    <!-- 从第223行到第268行的所有内容都需要删除 -->
+    
+    <script src="js/wallet.js"></script>
+    <!-- 移除这些不存在的文件引用 -->
+    <!-- <script src="js/lottery.js"></script> -->
+    <!-- <script src="js/ui.js"></script> -->
+    <!-- <script src="js/main.js"></script> -->
+</body>
+</html>
+
+
+    <!-- 卡牌展览页面 -->
+    <main class="cards-content page-content" style="display: none;">
+        <section class="cards-gallery-section">
+            <div class="cards-header">
+                <h1 class="cards-title">玩法卡牌展览</h1>
+                <p class="cards-subtitle">收集稀有卡牌，解锁特殊奖励</p>
+            </div>
+            
+            <div class="cards-grid">
+                <div class="card-item" data-card="golden-phoenix">
+                    <div class="card-image-container">
+                        <img src="GOLDEN PHOENIX.png" alt="Golden Phoenix" class="card-image">
+                        <div class="card-rarity legendary">传奇</div>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name">Golden Phoenix</h3>
+                        <p class="card-description">赢得本轮100%奖池，20%孵化几率</p>
+                        <div class="card-stats">
+                            <span class="stat-item">稀有度: ⭐⭐⭐⭐⭐</span>
+                            <span class="stat-item">孵化率: 20%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-item" data-card="crystal-rooster">
+                    <div class="card-image-container">
+                        <img src="CRYSTAL ROOSTER.png" alt="Crystal Rooster" class="card-image">
+                        <div class="card-rarity epic">史诗</div>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name">Crystal Rooster</h3>
+                        <p class="card-description">与最多5名玩家平分奖池，50%孵化几率</p>
+                        <div class="card-stats">
+                            <span class="stat-item">稀有度: ⭐⭐⭐⭐</span>
+                            <span class="stat-item">孵化率: 50%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-item" data-card="changpeng-zhao">
+                    <div class="card-image-container">
+                        <img src="CZ.png" alt="Changpeng Zhao" class="card-image">
+                        <div class="card-rarity mythic">神话</div>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name">Changpeng Zhao</h3>
+                        <p class="card-description">奖池自动转入CZ钱包，5%孵化几率</p>
+                        <div class="card-stats">
+                            <span class="stat-item">稀有度: ⭐⭐⭐⭐⭐⭐⭐</span>
+                            <span class="stat-item">孵化率: 5%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-item" data-card="striving-rooster">
+                    <div class="card-image-container">
+                        <img src="STRIVING ROOSTER.png" alt="Striving Rooster" class="card-image">
+                        <div class="card-rarity rare">稀有</div>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name">Striving Rooster</h3>
+                        <p class="card-description">奖池滚动到下一轮，25%孵化几率</p>
+                        <div class="card-stats">
+                            <span class="stat-item">稀有度: ⭐⭐⭐</span>
+                            <span class="stat-item">孵化率: 25%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-item coming-soon">
+                    <div class="card-image-container">
+                        <div class="coming-soon-placeholder">
+                            <div class="question-mark">?</div>
+                        </div>
+                        <div class="card-rarity unknown">未知</div>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name">更多卡牌</h3>
+                        <p class="card-description">更多游戏功能即将推出！</p>
+                        <div class="card-stats">
+                            <span class="stat-item">敬请期待...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cards-footer">
+                <div class="collection-stats">
+                    <h3>玩法卡牌</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 40%;"></div>
+                    </div>
+                    <p>已开发 4/10 卡牌玩法</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 卡牌详情模态框 -->
+    <div id="cardDetailModal" class="card-modal">
+        <div class="card-modal-overlay" onclick="closeCardDetail()"></div>
+        <div class="card-modal-content">
+            <button class="card-close-btn" onclick="closeCardDetail()">&times;</button>
+            <div class="card-detail-container">
+                <div class="card-image-full">
+                    <img id="cardDetailImage" src="" alt="" class="full-card-image">
+                </div>
+                <div class="card-detail-info">
+                    <h2 id="cardDetailName" class="card-detail-title"></h2>
+                    <div id="cardDetailRarity" class="card-detail-rarity"></div>
+                    <p id="cardDetailDescription" class="card-detail-description"></p>
+                    <div class="card-detail-stats">
+                        <div class="stat-row">
+                            <span class="stat-label">效果:</span>
+                            <span id="cardDetailEffect" class="stat-value"></span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">孵化率:</span>
+                            <span id="cardDetailHatchRate" class="stat-value"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 开发中提示弹窗 -->
+    <div id="developingModal" class="card-modal">
+        <div class="card-modal-overlay" onclick="closeDevelopingModal()"></div>
+        <div class="card-modal-content developing-modal">
+            <button class="card-close-btn" onclick="closeDevelopingModal()">&times;</button>
+            <div class="developing-content">
+                <div class="developing-icon">🚧</div>
+                <h2 class="developing-title">正在开发中</h2>
+                <p class="developing-message">敬请期待！</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+<!-- 领取空投页面内容 -->
+<div id="airdropContent" class="page-content airdrop-content" style="display: none;">
+    <div class="airdrop-container">
+        <!-- 页面标语 -->
+        <div class="airdrop-header">
+            <h1 class="airdrop-title">🎁 领取空投</h1>
+            <p class="airdrop-slogan">完成任务，有概率领取5万枚空投奖励！</p>
+        </div>
+        
+        <!-- 任务列表 -->
+        <div class="task-list">
+            <div class="task-item" id="task1">
+                <div class="task-icon">
+                    <span class="task-status" id="task1-status">⏳</span>
+                </div>
+                <div class="task-content">
+                    <h3 class="task-title">任务一：加入电报社区，关注官方推特</h3>
+                    <p class="task-description">点击按钮跳转到官方推特页面进行关注</p>
+                </div>
+                <button class="task-btn" id="task1-btn" onclick="completeTask(1, 'https://x.com/FomoChicken_BSC')">
+                    去完成
+                </button>
+            </div>
+            
+            <div class="task-item" id="task2">
+                <div class="task-icon">
+                    <span class="task-status" id="task2-status">⏳</span>
+                </div>
+                <div class="task-content">
+                    <h3 class="task-title">任务二：点赞、转发、评论官方推特</h3>
+                    <p class="task-description">点赞、转发、评论任意一条官方推特的文章，并在评论区留下BSC地址</p>
+                </div>
+                <button class="task-btn" id="task2-btn" onclick="completeTask(2, 'https://x.com/FomoChicken_BSC')">
+                    去完成
+                </button>
+            </div>
+        </div>
+        
+        <!-- 提交按钮 -->
+        <div class="submit-section">
+            <button class="submit-btn" id="submitBtn" disabled onclick="submitAirdrop()">
+                提交领取申请
+            </button>
+            <p class="submit-note">完成所有任务后即可提交申请</p>
+        </div>
+    </div>
+</div>
